@@ -3,7 +3,7 @@
 
 use libc;
 
-use std::mem;
+use restd::mem;
 
 use remacs_macros::lisp_fn;
 
@@ -491,7 +491,7 @@ pub fn rust_init_extra_syms() {
 include!(concat!(env!("OUT_DIR"), "/floatfns_exports.rs"));
 
 #[cfg(test)]
-use std::cmp::max;
+use restd::cmp::max;
 
 #[test]
 fn test_basic_float() {

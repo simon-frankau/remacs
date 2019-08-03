@@ -1,8 +1,8 @@
 //! marker support
 
 use libc::{c_void, ptrdiff_t};
-use std::mem;
-use std::ptr;
+use restd::mem;
+use restd::ptr;
 
 use remacs_macros::lisp_fn;
 

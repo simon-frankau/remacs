@@ -1,7 +1,8 @@
 //! Functions operating on numbers.
 
-use std::cmp;
-use std::sync::Mutex;
+use restd::cmp;
+use restd::sync::Mutex;
+use restd::vec::Vec;
 
 use rand::{rngs::StdRng, FromEntropy, Rng, SeedableRng};
 

@@ -1,6 +1,6 @@
 //! Text property support
 
-use std::ptr;
+use restd::ptr;
 
 use remacs_macros::lisp_fn;
 

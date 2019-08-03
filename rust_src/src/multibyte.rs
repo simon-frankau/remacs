@@ -32,10 +32,11 @@
 //! `&str`, and this module regrettably contains adapted copies of
 //! stretches of `std::str` functions.
 
-use std::convert::TryFrom;
-use std::fmt;
-use std::ptr;
-use std::slice;
+use restd::convert::TryFrom;
+use restd::fmt;
+use restd::ptr;
+use restd::slice;
+use restd::string::String;
 
 use libc::{c_char, c_int, c_uchar, c_uint, c_void, memset, ptrdiff_t, size_t};
 
@@ -265,18 +266,18 @@ impl PartialEq<char> for Codepoint {
     }
 }
 
-impl std::fmt::Display for Codepoint {
-    fn fmt(&self, f: &mut std::fmt::Formatter) -> Result<(), std::fmt::Error> {
+impl restd::fmt::Display for Codepoint {
+    fn fmt(&self, f: &mut restd::fmt::Formatter) -> Result<(), restd::fmt::Error> {
         match char::try_from(self.0) {
-            Ok(ch) => std::fmt::Display::fmt(&ch, f),
-            Err(_) => std::fmt::LowerHex::fmt(self, f),
+            Ok(ch) => restd::fmt::Display::fmt(&ch, f),
+            Err(_) => restd::fmt::LowerHex::fmt(self, f),
         }
     }
 }
 
-impl std::fmt::LowerHex for Codepoint {
-    fn fmt(&self, f: &mut std::fmt::Formatter) -> Result<(), std::fmt::Error> {
-        std::fmt::LowerHex::fmt(&self.0, f)
+impl restd::fmt::LowerHex for Codepoint {
+    fn fmt(&self, f: &mut restd::fmt::Formatter) -> Result<(), restd::fmt::Error> {
+        restd::fmt::LowerHex::fmt(&self.0, f)
     }
 }
 
@@ -461,8 +462,8 @@ impl<'a> PartialEq<&'a str> for LispStringRef {
     }
 }
 
-impl PartialEq<String> for LispStringRef {
-    fn eq(&self, other: &String) -> bool {
+impl PartialEq<restd::string::String> for LispStringRef {
+    fn eq(&self, other: &restd::string::String) -> bool {
         self == &other.as_str()
     }
 }

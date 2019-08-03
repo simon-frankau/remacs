@@ -88,7 +88,7 @@ pub fn interactive(_args: LispObject) {}
 pub fn funcall_interactively(args: &mut [LispObject]) -> LispObject {
     let count = c_specpdl_index();
 
-    unsafe { temporarily_switch_to_single_kboard(std::ptr::null_mut()) };
+    unsafe { temporarily_switch_to_single_kboard(restd::ptr::null_mut()) };
 
     unbind_to(count, funcall(args))
 }

@@ -1,6 +1,6 @@
 //! Indentation functions
 
-use std::{cmp::max, ptr};
+use restd::{cmp::max, ptr};
 
 use remacs_macros::lisp_fn;
 

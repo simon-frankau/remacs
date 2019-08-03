@@ -1,7 +1,7 @@
 //! Functions to deal with files
 use errno::{set_errno, Errno};
 
-use std::path;
+use restd::path;
 
 use remacs_macros::lisp_fn;
 

@@ -1,6 +1,6 @@
 //! Generic Lisp eval functions
 
-use std::{ptr, unreachable};
+use restd::{ptr, unreachable};
 
 use libc::c_void;
 

@@ -1,5 +1,5 @@
 use libc::c_int;
-use std::mem;
+use restd::mem;
 
 mod sys {
     use libc::{c_double, c_int};

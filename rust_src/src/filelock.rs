@@ -2,18 +2,20 @@
 
 use remacs_macros::lisp_fn;
 
-use std::fs::{remove_file, File};
-use std::io::prelude::Read;
-use std::io::Error;
-use std::io::ErrorKind::{InvalidData, InvalidInput, NotFound, PermissionDenied};
-use std::io::Result;
-use std::path::{Path, PathBuf};
+use restd::fs::{remove_file, File};
+use restd::io::prelude::Read;
+use restd::io::Error;
+use restd::io::ErrorKind::{InvalidData, InvalidInput, NotFound, PermissionDenied};
+use restd::io::Result;
+use restd::path::{Path, PathBuf};
+use restd::string::String;
+use restd::string::ToString;
 use systemstat::Platform;
 
 #[cfg(unix)]
 use libc::{ELOOP, O_NOFOLLOW, O_RDONLY};
 #[cfg(unix)]
-use std::{ffi::CString, ffi::OsStr, os::unix::ffi::OsStrExt, os::unix::io::FromRawFd};
+use restd::{ffi::CString, ffi::OsStr, os::unix::ffi::OsStrExt, os::unix::io::FromRawFd};
 
 use crate::{
     coding::encode_file_name,
@@ -159,7 +161,7 @@ fn read_link_as_string(path: &Path) -> Result<String> {
         .map_err(|_| {
             Error::new(
                 InvalidData,
-                format!("Target of link '{}' is not valid UTF-8", path.display()),
+                restd::format!("Target of link '{}' is not valid UTF-8", path.display()),
             )
         })
 }
@@ -194,7 +196,7 @@ fn read_lock_info(path: &Path) -> Result<Option<LockInfo>> {
             let info = LockInfo::parse(&data).ok_or_else(|| {
                 Error::new(
                     InvalidData,
-                    format!("Invalid lock information in '{}'", path.display()),
+                    restd::format!("Invalid lock information in '{}'", path.display()),
                 )
             })?;
             Ok(Some(info))
@@ -241,7 +243,7 @@ fn current_lock_owner(path: &Path) -> Result<LockState> {
         Some(info) => {
             // On current host?
             if info.host.as_bytes() == system_name().as_slice() {
-                if info.pid == std::process::id() as i32 {
+                if info.pid == restd::process::id() as i32 {
                     // We own it.
                     LockState::LockedByUs
                 } else if process_exists(info.pid) && boot_time_within_one_second(&info) {
@@ -278,8 +280,8 @@ fn to_path_buf(path: LispStringRef) -> PathBuf {} // TODO (may have to return a 
 fn make_lock_name(path: LispStringRef) -> PathBuf {
     let mut path = to_path_buf(path);
 
-    let mut lock_file_name = std::ffi::OsString::from(".#");
-    lock_file_name.push(path.file_name().unwrap_or_else(|| std::ffi::OsStr::new("")));
+    let mut lock_file_name = restd::ffi::OsString::from(".#");
+    lock_file_name.push(path.file_name().unwrap_or_else(|| restd::ffi::OsStr::new("")));
 
     path.set_file_name(lock_file_name);
 
@@ -339,13 +341,13 @@ include!(concat!(env!("OUT_DIR"), "/filelock_exports.rs"));
 #[cfg(test)]
 mod tests {
     use super::*;
-    use std::fs::remove_file;
+    use restd::fs::remove_file;
     use tempfile::NamedTempFile;
 
     #[cfg(unix)]
     #[test]
     fn test_read_link_as_string() -> Result<()> {
-        use std::os::unix::fs::symlink;
+        use crate::restd::os::unix::fs::symlink;
 
         let lock_temp_file = NamedTempFile::new()?;
         let lock_file = lock_temp_file.path();

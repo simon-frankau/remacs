@@ -171,7 +171,7 @@ fn generate_globals(path: &str) {
                     write!(
                         out_file,
                         "pub const {}: LispObject = crate::lisp::LispObject( \
-                         {} * (std::mem::size_of::<Lisp_Symbol>() as EmacsInt));\n",
+                         {} * (restd::mem::size_of::<Lisp_Symbol>() as EmacsInt));\n",
                         symbol_name, value
                     )
                     .expect("Write error in reading symbols stage");

@@ -1,9 +1,9 @@
 //! Lisp functions pertaining to editing.
 
-use std;
-use std::cmp::max;
-use std::ops::{Add, Sub};
-use std::ptr;
+use restd::cmp::max;
+use restd::ops::{Add, Sub};
+use restd::ptr;
+use restd::vec::Vec;
 
 use libc;
 use libc::{c_char, c_int, c_uchar, ptrdiff_t};
@@ -283,7 +283,7 @@ pub fn insert_char(character: Codepoint, count: Option<EmacsInt>, inherit: bool)
     let mut buffer = [0_u8; BUFSIZE];
     // bufferlen is the number of bytes used when filling the buffer
     // with as many copies of str as possible, without overflowing it.
-    let bufferlen = std::cmp::min(n, BUFSIZE - (BUFSIZE % len));
+    let bufferlen = restd::cmp::min(n, BUFSIZE - (BUFSIZE % len));
     for i in 0..bufferlen {
         buffer[i] = str[i % len];
     }
@@ -847,7 +847,7 @@ pub fn insert_buffer_substring(
     let mut e = end.map_or(buf_ref.zv, |n| n.to_fixnum() as isize);
 
     if b > e {
-        std::mem::swap(&mut b, &mut e);
+        restd::mem::swap(&mut b, &mut e);
     }
 
     if !(buf_ref.begv <= b && e <= buf_ref.zv) {

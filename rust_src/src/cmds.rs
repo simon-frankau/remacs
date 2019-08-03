@@ -1,8 +1,8 @@
 //! Commands
 
 use libc;
-use std;
-use std::ffi::CString;
+use restd::ffi::CString;
+use restd::vec::Vec;
 
 use remacs_macros::lisp_fn;
 

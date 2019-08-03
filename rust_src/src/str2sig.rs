@@ -4,8 +4,8 @@
 use libc;
 
 use libc::{c_char, c_int};
-use std::ffi::CStr;
-use std::str::FromStr;
+use restd::ffi::CStr;
+use restd::str::FromStr;
 
 #[cfg(not(unix))]
 const numname: [(&'static str, c_int); 0] = [];

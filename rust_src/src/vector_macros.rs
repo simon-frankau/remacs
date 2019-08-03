@@ -14,7 +14,7 @@ macro_rules! pseudovecsize {
 /// Equivalent to VECSIZE in C
 macro_rules! vecsize {
     ($ty: ty) => {
-        ((::std::mem::size_of::<$ty>() - *crate::vectors::HEADER_SIZE + *crate::vectors::WORD_SIZE
+        ((::restd::mem::size_of::<$ty>() - *crate::vectors::HEADER_SIZE + *crate::vectors::WORD_SIZE
             - 1)
             / *crate::vectors::WORD_SIZE)
     };

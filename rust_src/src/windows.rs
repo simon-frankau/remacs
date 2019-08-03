@@ -1,6 +1,6 @@
 //! Functions operating on windows.
 
-use std::{cmp, convert::TryFrom, fmt, ptr};
+use restd::{cmp, convert::TryFrom, fmt, ptr};
 
 use libc::c_int;
 

@@ -1,5 +1,5 @@
 //! Profiler implementation.
-use std::ffi::CString;
+use restd::ffi::CString;
 
 use remacs_macros::lisp_fn;
 

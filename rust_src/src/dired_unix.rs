@@ -3,13 +3,17 @@ use libc::{
     size_t, ssize_t, timespec as c_timespec,
 };
 
-use std::ffi::{CStr, CString, OsStr};
-use std::fs;
-use std::io;
-use std::os::unix::fs::MetadataExt;
-use std::path::Path;
-use std::ptr::null_mut;
-use std::slice;
+use restd::ffi::{CStr, CString, OsStr};
+use restd::fs;
+use restd::io;
+use restd::os::unix::fs::MetadataExt;
+use restd::path::Path;
+use restd::ptr::null_mut;
+use restd::slice;
+use restd::string::String;
+use restd::vec::Vec;
+use restd::string::ToString;
+use restd::borrow::ToOwned;
 
 use crate::{
     coding::decode_system,
@@ -221,7 +225,7 @@ fn fnames_from_os(fnames: &mut Vec<String>, dname: &str, match_re: Option<LispOb
         Err(err) => {
             xsignal!(
                 Qfile_missing,
-                format!("Opening directory: {}", err).to_bstring(),
+                restd::format!("Opening directory: {}", err).to_bstring(),
                 dname
             );
         }
@@ -252,7 +256,7 @@ fn read_dir(dname: &str, fnames: &mut Vec<String>, match_re: Option<LispObject>)
             Err(err) => {
                 return Err(io::Error::new(
                     io::ErrorKind::InvalidInput,
-                    format!("Could not decode {:?}", err),
+                    restd::format!("Could not decode {:?}", err),
                 ));
             }
         };

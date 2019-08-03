@@ -1,10 +1,10 @@
 //! Functions operating on vector(like)s, and general sequences.
 
-use std::cmp::Ordering;
-use std::fmt;
-use std::fmt::{Debug, Formatter};
-use std::mem;
-use std::ptr;
+use restd::cmp::Ordering;
+use restd::fmt;
+use restd::fmt::{Debug, Formatter};
+use restd::mem;
+use restd::ptr;
 
 use libc::ptrdiff_t;
 
@@ -766,7 +766,7 @@ pub fn recordp(object: LispObject) -> bool {
 lazy_static! {
     pub static ref HEADER_SIZE: usize =
         { unsafe { offset_of!(crate::remacs_sys::Lisp_Vector, contents) } };
-    pub static ref WORD_SIZE: usize = { ::std::mem::size_of::<crate::lisp::LispObject>() };
+    pub static ref WORD_SIZE: usize = { ::restd::mem::size_of::<crate::lisp::LispObject>() };
 }
 
 include!(concat!(env!("OUT_DIR"), "/vectors_exports.rs"));

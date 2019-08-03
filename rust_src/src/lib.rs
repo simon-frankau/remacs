@@ -18,6 +18,7 @@
 #![feature(specialization)]
 #![feature(stmt_expr_attributes)]
 #![feature(untagged_unions)]
+#![no_std]
 
 extern crate errno;
 #[macro_use]
@@ -34,6 +35,8 @@ extern crate field_offset;
 extern crate flate2;
 
 extern crate core;
+
+extern crate restd;
 
 // Wilfred/remacs#38 : Need to override the allocator for legacy unexec support on Mac.
 #[cfg(all(not(test), target_os = "macos", feature = "unexecmacosx"))]

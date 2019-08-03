@@ -1,6 +1,6 @@
 //! Threading code.
 
-use std::mem;
+use restd::mem;
 
 use libc;
 

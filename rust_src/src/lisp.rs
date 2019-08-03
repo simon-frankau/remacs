@@ -1,13 +1,13 @@
 //! This module contains Rust definitions whose C equivalents live in
 //! lisp.h.
 
-use std::convert::{From, Into};
-use std::ffi::CString;
-use std::fmt;
-use std::fmt::{Debug, Display, Error, Formatter};
-use std::mem;
-use std::ops::{Deref, DerefMut};
-
+use restd::convert::{From, Into};
+use restd::ffi::CString;
+use restd::fmt;
+use restd::fmt::{Debug, Display, Error, Formatter};
+use restd::mem;
+use restd::ops::{Deref, DerefMut};
+use restd::vec::Vec;
 use libc::{c_char, c_void, intptr_t, uintptr_t};
 
 use crate::{
@@ -163,7 +163,7 @@ impl<T> PartialEq for ExternalPtr<T> {
 }
 
 impl<T> PartialOrd for ExternalPtr<T> {
-    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+    fn partial_cmp(&self, other: &Self) -> Option<restd::cmp::Ordering> {
         Some(self.as_ptr().cmp(&other.as_ptr()))
     }
 }

@@ -1,7 +1,7 @@
 //! Operations on lists.
 
-use std::fmt;
-use std::fmt::{Debug, Formatter};
+use restd::fmt;
+use restd::fmt::{Debug, Formatter};
 
 use libc::c_void;
 
@@ -952,7 +952,7 @@ pub extern "C" fn mapcar1(
     let output = if vals.is_null() {
         &mut safe_value
     } else {
-        unsafe { std::slice::from_raw_parts_mut(vals, leni as usize) }
+        unsafe { restd::slice::from_raw_parts_mut(vals, leni as usize) }
     };
 
     if let Some(v) = seq.as_vectorlike() {

@@ -1,6 +1,6 @@
 //! Updating of data structures for redisplay.
 
-use std::{cmp, ptr};
+use restd::{cmp, ptr};
 
 use remacs_lib::current_timespec;
 use remacs_macros::lisp_fn;

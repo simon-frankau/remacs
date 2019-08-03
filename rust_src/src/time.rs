@@ -1,8 +1,9 @@
 //! Time support
 
-use std::cmp::Ordering;
-use std::ops::{Add, Sub};
-use std::ptr;
+use restd::cmp::Ordering;
+use restd::ops::{Add, Sub};
+use restd::ptr;
+use restd::vec::Vec;
 
 use libc::timespec as c_timespec;
 use libc::{c_int, c_long, time_t};

@@ -1,10 +1,10 @@
 //! font support
 
-use std::ptr;
+use restd::ptr;
 
 use remacs_macros::lisp_fn;
 
-use std::{ffi::CString, mem};
+use restd::{ffi::CString, mem, vec::Vec};
 
 use crate::{
     data, fns,

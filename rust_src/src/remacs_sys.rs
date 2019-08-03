@@ -16,7 +16,7 @@
 //! - `BoolBF`
 
 use libc::{self, c_char, c_void, ptrdiff_t};
-use std;
+use restd;
 
 use libc::timespec;
 use remacs_lib::current_timespec;

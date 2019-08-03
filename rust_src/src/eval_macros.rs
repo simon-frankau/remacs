@@ -74,7 +74,7 @@ macro_rules! error {
         xsignal!(crate::remacs_sys::Qerror, strobj);
     }};
     ($fmtstr:expr, $($arg:expr),*) => {{
-        let formatted = format!($fmtstr, $($arg),*);
+        let formatted = restd::format!($fmtstr, $($arg),*);
         #[allow(unused_unsafe)]
         let strobj = unsafe {
             crate::remacs_sys::make_string(formatted.as_ptr() as *const ::libc::c_char,
@@ -334,7 +334,7 @@ macro_rules! local_unibyte_string {
                 s: crate::remacs_sys::Lisp_String__bindgen_ty_1__bindgen_ty_1 {
                     size: len,
                     size_byte: -1,
-                    intervals: ::std::ptr::null_mut(),
+                    intervals: restd::ptr::null_mut(),
                     data: bytes.as_mut_ptr() as *mut u8,
                 },
             },

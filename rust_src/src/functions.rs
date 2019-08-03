@@ -28,7 +28,7 @@ macro_rules! mock_float {
         // Fake an allocated float by just putting it on the heap and leaking it.
         let boxed = Box::new(crate::remacs_sys::Lisp_Float {
             u: crate::remacs_sys::Lisp_Float__bindgen_ty_1 {
-                data: unsafe { ::std::mem::transmute($f) },
+                data: unsafe { ::restd::mem::transmute($f) },
             },
         });
         let raw = crate::lisp::ExternalPtr::new(Box::into_raw(boxed));
@@ -42,14 +42,14 @@ macro_rules! mock_unibyte_string {
         mock_unibyte_string!("")
     };
     ($string: expr) => {{
-        let strcopy = ::std::ffi::CString::new($string).unwrap();
+        let strcopy = ::restd::ffi::CString::new($string).unwrap();
         let len = strcopy.as_bytes().len() as ::libc::ptrdiff_t;
         let boxed = Box::new(crate::remacs_sys::Lisp_String {
             u: crate::remacs_sys::Lisp_String__bindgen_ty_1 {
                 s: crate::remacs_sys::Lisp_String__bindgen_ty_1__bindgen_ty_1 {
                     size: len,
                     size_byte: -1,
-                    intervals: ::std::ptr::null_mut(),
+                    intervals: ::restd::ptr::null_mut(),
                     data: strcopy.into_raw() as *mut u8,
                 },
             },
@@ -66,14 +66,14 @@ macro_rules! mock_multibyte_string {
         mock_multibyte_string!("")
     };
     ($string: expr) => {{
-        let strcopy = ::std::ffi::CString::new($string).unwrap();
+        let strcopy = ::restd::ffi::CString::new($string).unwrap();
         let len = strcopy.as_bytes().len() as ::libc::ptrdiff_t;
         let boxed = Box::new(crate::remacs_sys::Lisp_String {
             u: crate::remacs_sys::Lisp_String__bindgen_ty_1 {
                 s: crate::remacs_sys::Lisp_String__bindgen_ty_1__bindgen_ty_1 {
                     size: len,
                     size_byte: len,
-                    intervals: ::std::ptr::null_mut(),
+                    intervals: ::restd::ptr::null_mut(),
                     data: strcopy.into_raw() as *mut u8,
                 },
             },

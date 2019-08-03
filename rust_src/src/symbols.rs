@@ -1,8 +1,8 @@
 //! symbols support
 
-use std::fmt;
-use std::fmt::{Debug, Formatter};
-use std::ptr;
+use restd::fmt;
+use restd::fmt::{Debug, Formatter};
+use restd::ptr;
 
 use remacs_macros::lisp_fn;
 
@@ -239,7 +239,7 @@ impl LispSymbolRef {
         let current_thread = ThreadState::current_thread();
         let specpdl = SpecbindingRef::new(current_thread.m_specpdl);
 
-        let mut binding = SpecbindingRef::new(std::ptr::null_mut());
+        let mut binding = SpecbindingRef::new(restd::ptr::null_mut());
         let mut pdl = SpecbindingRef::new(current_thread.m_specpdl_ptr);
 
         while pdl > specpdl {

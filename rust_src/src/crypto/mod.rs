@@ -1,5 +1,4 @@
-use std;
-use std::slice;
+use restd::slice;
 
 use libc::ptrdiff_t;
 
@@ -19,6 +18,8 @@ use crate::{
     symbols::{symbol_name, LispSymbolRef},
     threads::ThreadState,
 };
+
+use restd::string::ToString;
 
 #[derive(Clone, Copy)]
 enum HashAlg {

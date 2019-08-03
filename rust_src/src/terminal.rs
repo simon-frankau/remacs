@@ -1,6 +1,6 @@
 //! Functions related to terminal devices.
 
-use std::{mem, ptr};
+use restd::{mem, ptr};
 
 use libc::{c_int, c_void};
 

@@ -35,7 +35,7 @@ pub fn error_message_string(obj: LispCons) -> LispObject {
     }
 
     unsafe {
-        print_error_message(obj.into(), Vprin1_to_string_buffer, std::ptr::null(), Qnil);
+        print_error_message(obj.into(), Vprin1_to_string_buffer, restd::ptr::null(), Qnil);
 
         set_buffer_internal(LispBufferRef::from(Vprin1_to_string_buffer).as_mut());
         value = Fbuffer_string();

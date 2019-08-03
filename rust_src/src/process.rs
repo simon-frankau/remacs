@@ -2,7 +2,7 @@
 use libc;
 
 use remacs_macros::lisp_fn;
-use std::convert::Into;
+use restd::convert::Into;
 
 use crate::{
     buffers::{current_buffer, get_buffer, LispBufferOrName, LispBufferRef},

@@ -2,8 +2,8 @@
 
 use field_offset::FieldOffset;
 use libc;
-use std::ffi::CString;
-use std::ptr;
+use restd::ffi::CString;
+use restd::ptr;
 
 use errno::errno;
 

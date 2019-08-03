@@ -16,7 +16,7 @@ cfg_if! {
     if #[cfg(windows)] {
         use crate::remacs_sys::w32_daemon_event;
         pub fn is_daemon() -> bool {
-            unsafe { w32_daemon_event != std::ptr::null_mut() }
+            unsafe { w32_daemon_event != restd::ptr::null_mut() }
         }
     } else {
         use crate::remacs_sys::daemon_type;

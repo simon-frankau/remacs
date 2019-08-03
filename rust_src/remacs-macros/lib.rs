@@ -36,7 +36,7 @@ pub fn lisp_fn(attr_ts: TokenStream, fn_ts: TokenStream) -> TokenStream {
         let cbyte_intspec = CByteLiteral(intspec.as_str());
         quote! { (#cbyte_intspec).as_ptr() as *const libc::c_char }
     } else {
-        quote! { std::ptr::null() }
+        quote! { restd::ptr::null() }
     };
 
     match function.fntype {
@@ -58,13 +58,13 @@ pub fn lisp_fn(attr_ts: TokenStream, fn_ts: TokenStream) -> TokenStream {
 
             let b = quote! {
                 let args = unsafe {
-                    std::slice::from_raw_parts_mut::<crate::lisp::LispObject>(
+                    restd::slice::from_raw_parts_mut::<crate::lisp::LispObject>(
                         args, nargs as usize)
                 };
             };
             body.extend(b);
 
-            let arg = quote! { unsafe { std::mem::transmute(args) } };
+            let arg = quote! { unsafe { restd::mem::transmute(args) } };
             rargs.extend(arg);
         }
     }
@@ -108,8 +108,8 @@ pub fn lisp_fn(attr_ts: TokenStream, fn_ts: TokenStream) -> TokenStream {
 
     if cfg!(windows) {
         windows_header = quote! {
-            | (std::mem::size_of::<crate::remacs_sys::Lisp_Subr>()
-               / std::mem::size_of::<crate::remacs_sys::EmacsInt>()) as libc::ptrdiff_t
+            | (restd::mem::size_of::<crate::remacs_sys::Lisp_Subr>()
+               / restd::mem::size_of::<crate::remacs_sys::EmacsInt>()) as libc::ptrdiff_t
         };
     }
 
@@ -148,9 +148,9 @@ pub fn lisp_fn(attr_ts: TokenStream, fn_ts: TokenStream) -> TokenStream {
                 unsafe {
                     let ptr =
                         crate::remacs_sys::xmalloc(
-                            std::mem::size_of::<crate::remacs_sys::Lisp_Subr>()
+                            restd::mem::size_of::<crate::remacs_sys::Lisp_Subr>()
                         ) as *mut crate::remacs_sys::Lisp_Subr;
-                    std::ptr::copy_nonoverlapping(&subr, ptr, 1);
+                    restd::ptr::copy_nonoverlapping(&subr, ptr, 1);
                     crate::lisp::ExternalPtr::new(ptr)
                 }
             };

@@ -1,7 +1,6 @@
 //! Keymap support
 
-use std;
-use std::ptr;
+use restd::ptr;
 
 use libc::c_void;
 
@@ -378,7 +377,7 @@ pub unsafe extern "C" fn map_keymap_internal(
                 }
             } else if binding.is_char_table() {
                 let saved = match fun {
-                    Some(f) => make_save_funcptr_ptr_obj(Some(std::mem::transmute(f)), data, args),
+                    Some(f) => make_save_funcptr_ptr_obj(Some(restd::mem::transmute(f)), data, args),
                     None => make_save_funcptr_ptr_obj(None, data, args),
                 };
                 map_char_table(Some(map_keymap_char_table_item), Qnil, binding, saved);

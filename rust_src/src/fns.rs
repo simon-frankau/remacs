@@ -1,6 +1,6 @@
 //! Random utility Lisp functions.
 
-use std::{mem, ptr, slice};
+use restd::{mem, ptr, slice, vec::Vec};
 
 use libc;
 

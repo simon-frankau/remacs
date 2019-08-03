@@ -1,5 +1,7 @@
 //! Base64 de- and encoding functions.
-use std::{cmp::max, slice};
+use restd::{cmp::max, slice};
+use restd::vec::Vec;
+use restd::string::String;
 
 use libc::{c_char, c_uchar};
 use line_wrap::LineEnding;

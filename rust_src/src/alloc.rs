@@ -1,7 +1,7 @@
 //! Storage allocation and gc
 
 use remacs_macros::lisp_fn;
-use std::ptr;
+use restd::{ptr, vec::Vec};
 
 use crate::{
     lisp::{ExternalPtr, LispObject},
@@ -29,7 +29,7 @@ use crate::{
 #[lisp_fn]
 pub fn memory_use_counts() -> Vec<LispObject> {
     unsafe {
-        vec![
+        restd::vec::vec![
             bounded_number(globals.cons_cells_consed),
             bounded_number(globals.floats_consed),
             bounded_number(globals.vector_cells_consed),

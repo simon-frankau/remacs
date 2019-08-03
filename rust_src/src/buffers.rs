@@ -1,6 +1,6 @@
 //! Functions operating on buffers.
 
-use std::{self, iter, mem, ops, ptr, slice};
+use restd::{iter, mem, ops, ptr, slice, vec::Vec};
 
 use field_offset::FieldOffset;
 use libc::{self, c_char, c_uchar, c_void, ptrdiff_t};
@@ -105,9 +105,9 @@ const fn buf_bytes_max() -> ptrdiff_t {
         libc::ptrdiff_t::max_value(),
     ];
     const arith_max: ptrdiff_t =
-        p[((p[1] - p[0]) >> ((8 * std::mem::size_of::<ptrdiff_t>()) - 1)) as usize];
+        p[((p[1] - p[0]) >> ((8 * restd::mem::size_of::<ptrdiff_t>()) - 1)) as usize];
     const q: [ptrdiff_t; 2] = [(MOST_POSITIVE_FIXNUM - 1) as ptrdiff_t, arith_max];
-    q[((q[1] - q[0]) >> ((8 * std::mem::size_of::<ptrdiff_t>()) - 1)) as usize]
+    q[((q[1] - q[0]) >> ((8 * restd::mem::size_of::<ptrdiff_t>()) - 1)) as usize]
 }
 pub const BUF_BYTES_MAX: ptrdiff_t = buf_bytes_max();
 
@@ -1657,7 +1657,7 @@ pub fn generate_new_buffer_name(name: LispStringRef, ignore: LispObject) -> Lisp
 
     let basename = if name.byte_at(0) == b' ' {
         let mut rng = OsRng::new().unwrap();
-        let mut s = format!("-{}", rng.gen_range(0, 1_000_000));
+        let mut s = restd::format!("-{}", rng.gen_range(0, 1_000_000));
         local_unibyte_string!(suffix, s);
         let genname = lisp_concat!(name, suffix);
         if get_buffer(genname.into()).is_none() {
@@ -1670,7 +1670,7 @@ pub fn generate_new_buffer_name(name: LispStringRef, ignore: LispObject) -> Lisp
 
     let mut suffix_count = 2;
     loop {
-        let mut s = format!("<{}>", suffix_count);
+        let mut s = restd::format!("<{}>", suffix_count);
         local_unibyte_string!(suffix, s);
         let candidate = lisp_concat!(basename, suffix).force_string();
         if string_equal(candidate, ignore) || get_buffer(candidate.into()).is_none() {

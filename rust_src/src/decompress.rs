@@ -1,7 +1,8 @@
 //! Interface to zlib.
-use std::cmp::min;
-use std::io::prelude::Read;
-use std::slice;
+use restd::cmp::min;
+use restd::io::prelude::Read;
+use restd::slice;
+use restd::boxed::Box;
 
 use flate2::read::{DeflateDecoder, GzDecoder, ZlibDecoder};
 use remacs_macros::lisp_fn;

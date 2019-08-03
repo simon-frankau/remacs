@@ -508,7 +508,7 @@ pub fn read_buffer(
     } else {
         // Partial backwards compatability for older read_buffer_functions which
         // expect a 'predicate' argument.
-        let mut args = vec![
+        let mut args = restd::vec::vec![
             unsafe { globals.Vread_buffer_function },
             prompt.into(),
             def,
